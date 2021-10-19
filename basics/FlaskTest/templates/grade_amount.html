@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>借款等级与借款金额关系</title>
+    <script src="../static/echarts.min.js"></script>
+</head>
+<body>
+    <div id="root" style="width: 1000px;height: 600px">
+    </div>
+    <script>
+        root = document.getElementById("root")
+        echart = echarts.init(root)
+        console.log({{data|tojson}})
+        var series1=[];
+        var zone=[];
+        var length={{data|tojson}}.length
+        for(var i=0;i<length;i++){
+            zone.push({{data|tojson}}[i].category)
+        }
+        for(var i=0;i<length;i++){
+            series1.push({
+                name:zone[i],
+                type:'bar',
+                stack:'总量',
+                data:{{data|tojson}}[i].value
+            })
+        }
+        console.log(series1)
+        echart.setOption({
+            title :{
+                text :"借款等级与借款金额关系图",
+                left:"center",
+                textStyle:{
+                    fontSize:"200%"
+                }
+            },
+             tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend:{
+                left:"center",
+                top:"bottom",
+                data:zone,
+                name:'等级',
+                show:true
+            },
+            xAxis:{
+                type:'value',
+                name:'人数'
+            },
+            yAxis:{
+                type:'category',
+                data:['0-1000','1000-5000','5000-10000','10000-20000','20000-50000'],
+                name:'借款金额区间'
+            },
+            series:series1
+        })
+    </script>
+</body>
+</html>

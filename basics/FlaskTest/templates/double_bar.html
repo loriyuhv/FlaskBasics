@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>借款等级分布</title>
+    <script src="../static/echarts.min.js"></script>
+</head>
+<body>
+    <div id="root" style="width: 1000px;height: 600px">
+
+    </div>
+    <script>
+        root = document.getElementById("root")
+        echart = echarts.init(root)
+        var series1=[];
+        var length={{data|tojson}}.length
+        for(var i=0;i<length;i++){
+            series1.push({
+                name:i+1,
+                type:'bar',
+                stack:'总量',
+                label:{
+                        show:true,
+                        position:'insideRight'
+                    },
+                data:{{data|tojson}}[i].value
+            })
+        }
+        echart.setOption({
+            title :{
+                text :"借款等级分布图",
+                left:"center",
+                textStyle:{
+                    fontSize:"200%"
+                }
+            },
+             tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend:{
+                left:"center",
+                top:"bottom",
+                data:['1','2','3','4','5'],
+                name:'子等级'
+            },
+            xAxis:{
+                type:'value',
+                name:'人数'
+            },
+            yAxis:{
+                type:'category',
+                data:['A','B','C','D','E','F','G'],
+                name:'等级'
+            },
+            series:series1
+        })
+    </script>
+</body>
+</html>
