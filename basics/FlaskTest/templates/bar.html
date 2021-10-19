@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>借款金额分布</title>
+    <script src="../static/echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="root" style="width: 1000px;height: 600px"></div>
+    <script>
+        root = document.getElementById("root")
+        echart = echarts.init(root)
+        echart.setOption({
+            title :{
+                text :"借款金额分布图",
+                left:"center",
+                textStyle:{
+                    fontSize:"200%"
+                }
+            },
+            legend:{
+                left:"right",
+                top:"center",
+            },
+            xAxis:{
+                type:"category",
+                data:{{data.xData|safe}},
+                name:"借款金额：美元"
+            },
+            yAxis:{
+                name:"人数"
+            },
+            series:[{
+                name:"人数",
+                type:"bar",
+                label:{
+                    show:true,
+                    position:'top'
+                },
+                data:{{data.yData}}
+            }]
+        })
+    </script>
+</body>
+
+</html>
