@@ -70,9 +70,9 @@ def GetData():
     )
     cursor = connect.cursor()
     # 1借款金额分布
-    cursor.execute("SELECT * FROM loan_amount ORDER BY CAST(SUBSTRING_INDEX(zone,'-',1) AS SIGNED);")
+    # cursor.execute("SELECT * FROM loan_amount ORDER BY CAST(SUBSTRING_INDEX(zone,'-',1) AS SIGNED);")
     # 2借款等级分布 需要注释掉上一条命令
-    # cursor.execute("SELECT * FROM loan_grade ORDER BY RIGHT(subgrade,1),grade")
+    cursor.execute("SELECT * FROM loan_grade ORDER BY RIGHT(subgrade,1),grade")
     # 3借款等级与借款金额的关系 需要注释掉上一条命令
     # cursor.execute("SELECT * FROM grade_amount ORDER BY grade,CAST(SUBSTRING_INDEX(amount,'-',1) AS SIGNED)")
     # 从mysql提取数据到data
